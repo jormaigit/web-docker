@@ -1,0 +1,23 @@
+.tamanio{
+    font-size: 30px
+}
+
+.sombra{
+    text-shadow: 2px 2px 4px black;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.imagen {
+  width: 100%; /* Ajusta el ancho al 100% */
+  height: 100%; /* Ajusta la altura automáticamente para mantener la proporción */
+  /* Añade otros estilos necesarios */
+}
+
+.product-name {
+    font-size: 13px;
+    margin: 10px 0;
+    overflow: hidden;  
+}
