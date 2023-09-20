@@ -1,4 +1,6 @@
 <?php
+ob_start();
+header('Content-Type: text/html; charset=utf-8');
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -143,6 +145,7 @@ if (isset($_GET['id'])) {
   $id = intval($_GET['id']);
 
   $conexion = new mysqli("base_datos", "root", "test", "tienda");
+  $conexion->set_charset("utf8");
 
   if ($conexion->connect_error) {
       die("Error de conexión: " . $conexion->connect_error);
@@ -178,10 +181,6 @@ if (isset($_GET['id'])) {
         <input class="btn btn-light" type="submit" value="Agregar al carrito">
     </form>
       </div>
-
-          
-          </body>
-          </html>
           
           <?php
               }
@@ -222,7 +221,7 @@ if (isset($_GET['id'])) {
 
 
     $conexion->close();
-
+    ob_end_flush();
 
 ?> 
 </div>
@@ -285,5 +284,7 @@ if (isset($_GET['id'])) {
     <div class="text-center"><p class="text-white">Calle del Torno, 2-4, 28522 Rivas-Vaciamadrid, Madrid, España</p></div>
   </div>
 </footer>
+</body>
+</html>
 
 

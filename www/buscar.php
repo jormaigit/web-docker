@@ -1,4 +1,6 @@
 <?php
+ob_start();
+header('Content-Type: text/html; charset=utf-8');
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -125,6 +127,7 @@ if ($resultado->num_rows > 0) {
     }
 
     $conexion->close();
+    ob_end_flush();
 ?>
 
 
@@ -188,7 +191,8 @@ if ($resultado->num_rows > 0) {
     <div class="text-center"><p class="text-white">Calle del Torno, 2-4, 28522 Rivas-Vaciamadrid, Madrid, España</p></div>
   </div>
 </footer>
-
+</body>
+</html>
 
 
     

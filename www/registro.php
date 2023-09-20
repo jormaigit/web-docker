@@ -1,7 +1,9 @@
 <?php
+ob_start();
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
+  
 }
 
 
@@ -10,7 +12,7 @@ function restriccionesFormPhP($email,$contrasenia) {
   $contraseniaLongRestriccion= "/^.{6,20}$/";
   $contraseniaMayusRestriccion= "/[A-Z]/";
   $contraseniaMinusRestriccion= "/[a-z]/";
-  $contraseniaSpecialChRestriccion= "/[!@#$%^&*()_+{}|:\"<>?`~\\-=\\[\\]\\\\;',.\/]/";
+  $contraseniaSpecialChRestriccion = "/[\!\@\#\$\%\^\&\*\(\)\_\+\{\}\|\:\"\<\>\?\=\[\]\;\-\\\,\.\/]/";
   $contraseniaDigitoRestriccion= "/\d/";
 
   if (!preg_match($emailRestriccion, $email) 
@@ -86,6 +88,7 @@ if (isset($_POST["submit"])) {
       if ($validacion === true) {
 
         $conexion = new mysqli("base_datos", "root", "test", "tienda");
+        $conexion->set_charset("utf8");
 
           if ($conexion->connect_error) {
               die("Error de conexión " . $conexion->connect_error);
@@ -238,7 +241,7 @@ elseif (!isset($_POST["submit"])) {
 
   <?php
         }
+        ob_end_flush();
   ?>
-
 </body>
 </html>

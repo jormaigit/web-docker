@@ -1,4 +1,6 @@
 <?php
+ob_start();
+header('Content-Type: text/html; charset=utf-8');
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -389,6 +391,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         
           $conexion->close();
   }
+
+  ob_end_flush();
 ?>
 
 <!--PIE DE PÁGINA-->

@@ -1,5 +1,5 @@
-
 <?php
+ob_start();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,6 +12,7 @@ if (!isset($_SESSION["emailLogued"])) {
   }
 
   $conexion = new mysqli("base_datos", "root", "test", "tienda");
+  $conexion->set_charset("utf8");
 
 $ID_usuario = isset($_SESSION['ID_usuario']) ? intval($_SESSION['ID_usuario']) : 0;
 
@@ -92,6 +93,8 @@ if($result1->num_rows > 0) {
 }
     $conn->close();
 echo '</div>';
+
+ob_end_flush();
 ?>
 
 <script>

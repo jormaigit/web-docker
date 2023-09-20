@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();

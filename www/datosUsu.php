@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -185,6 +186,7 @@ if (isset($_POST['pass_antigua']) && isset($_POST['nueva_pass'])) {
 
     // Mostrar los pedidos en datosUSu.php
     include ("mis_pedidos.php");
+    ob_end_flush();
 
 ?>
 

@@ -1,4 +1,6 @@
 <?php
+ob_start();
+header('Content-Type: text/html; charset=utf-8');
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -232,6 +234,7 @@ function carrouselProductos($titulo, $nombredelproducto, $carrouselID, $conexion
 }
 
 $conexion = new mysqli("base_datos", "root", "test", "tienda");
+$conexion->set_charset("utf8");
 
 // Arrays estáticos
 
@@ -262,6 +265,7 @@ carrouselProductos("Los Juegos Más Vendidos", $juegos, "carrouselTipo2", $conex
 carrouselProductos("Los Portátiles Más Vendidos", $portatiles, "carrouselTipo3", $conexion);
 
 $conexion->close();
+ob_end_flush();
 ?>
 
 

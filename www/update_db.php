@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
     $session_id = session_id(); 
@@ -13,6 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     $conexion = new mysqli("base_datos", "root", "test", "tienda");
+    $conexion->set_charset("utf8");
 
 $ID_usuario = $_SESSION['ID_usuario'];
 
@@ -52,4 +53,5 @@ $stmt4->execute();
 
 $conn->close();
 
+ob_end_flush();
 ?>

@@ -70,7 +70,7 @@ CREATE TABLE producto (
   precio DECIMAL(6,2) NOT NULL CHECK (precio >= 0),
   nombre_producto VARCHAR(200) NOT NULL,
   imagen VARCHAR(200) NOT NULL,
-  descripcion TEXT,
+  descripcion TEXT CHARACTER SET utf8,
   stock int(2) not null check (stock >= 0 and stock <= 99),
   tipo VARCHAR(50) NOT NULL 
   CHECK (tipo IN ('componente', 'ordenador', 'smartphone', 'periferico', 'televisor', 'consola')),

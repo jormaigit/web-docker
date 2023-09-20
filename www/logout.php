@@ -1,4 +1,5 @@
 <?php
+ob_start();
     session_start();
     
     // Desasigna todas las variables de la sesión
@@ -16,5 +17,8 @@
 
     
     header("location: index.php");
+    ob_end_flush();
     exit();
+    
+    
 ?>

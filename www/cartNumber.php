@@ -1,4 +1,5 @@
-<?php 
+<?php
+ob_start(); 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
     $session_id = session_id();
@@ -12,6 +13,7 @@ if (!isset($_SESSION["emailLogued"])) {
   }
 
   $conexion = new mysqli("base_datos", "root", "test", "tienda");
+  $conexion->set_charset("utf8");
 
 
 if(isset($_SESSION["ID_usuario"])) {
@@ -24,6 +26,8 @@ if(isset($_SESSION["ID_usuario"])) {
     $row = $result->fetch_assoc();
     $_SESSION["totalCarrito"] = $row['total'] ? $row['total'] : 0; // Guarda el total en la sesión
 }
+
+ob_end_flush();
 ?>
 
 

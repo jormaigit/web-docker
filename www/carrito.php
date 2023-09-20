@@ -1,4 +1,6 @@
-<?php 
+<?php
+ob_start();
+header('Content-Type: text/html; charset=utf-8');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -15,6 +17,7 @@ $ID_usuario = $_SESSION['ID_usuario'];
 
 // Conexión a la BD
 $conexion = new mysqli("base_datos", "root", "test", "tienda");
+$conexion->set_charset("utf8");
 ?>
 
 
@@ -41,7 +44,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
         // Borrar producto del carrito según el ID_usuario e ID_producto
         $ID_producto = $_POST['product_id'];
 
-        $stmt = $conn->prepare("DELETE FROM carrito WHERE ID_usuario = ? AND ID_producto = ?");
+        $stmt = $conexion->prepare("DELETE FROM carrito WHERE ID_usuario = ? AND ID_producto = ?");
         $stmt->bind_param("ii", $ID_usuario, $ID_producto);
         $stmt->execute();
 
@@ -60,7 +63,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
         is_numeric($_POST['cantidad']) ? $_POST['cantidad'] : 1; // Cantidad por defecto
 
         // Verifica si el producto ya está en el carrito
-        $stmt = $conn->prepare("SELECT * FROM carrito WHERE ID_usuario = ? AND ID_producto = ?");
+        $stmt = $conexion->prepare("SELECT * FROM carrito WHERE ID_usuario = ? AND ID_producto = ?");
         $stmt->bind_param("ii", $ID_usuario, $ID_producto);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -68,7 +71,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
 
         if ($result->num_rows > 0) {
             // Verifica el stock del producto
-            $stmt_stock = $conn->prepare("SELECT stock FROM producto WHERE ID = ?");
+            $stmt_stock = $conexion->prepare("SELECT stock FROM producto WHERE ID = ?");
             $stmt_stock->bind_param("i", $ID_producto);
             $stmt_stock->execute();
             $result_stock = $stmt_stock->get_result();
@@ -78,7 +81,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
             // Verificación de si la cantidad es mayor al stock
             if ($cantidad <= $row_stock['stock']) {
                 // El producto ya está en el carrito, actualiza la cantidad
-                $stmt_update = $conn->prepare("UPDATE carrito SET cantidad = ? WHERE ID_usuario = ? AND ID_producto = ?");
+                $stmt_update = $conexion->prepare("UPDATE carrito SET cantidad = ? WHERE ID_usuario = ? AND ID_producto = ?");
                 $stmt_update->bind_param("iii", $cantidad, $ID_usuario, $ID_producto);
                 $stmt_update->execute();
 
@@ -97,7 +100,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
             }
         } else {
             // El producto no está en el carrito, inserta un nuevo producto
-            $stmt_insert = $conn->prepare("INSERT INTO carrito (ID_usuario, ID_producto, cantidad) VALUES (?, ?, ?)");
+            $stmt_insert = $conexion->prepare("INSERT INTO carrito (ID_usuario, ID_producto, cantidad) VALUES (?, ?, ?)");
             $stmt_insert->bind_param("iii", $ID_usuario, $ID_producto, $cantidad);
             $stmt_insert->execute();
 
@@ -113,7 +116,7 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
 
 
 // Preparamos la consulta para los productos en el carrito
-$stmt = $conn->prepare("SELECT carrito.*, producto.* 
+$stmt = $conexion->prepare("SELECT carrito.*, producto.* 
                         FROM carrito 
                         INNER JOIN producto ON carrito.ID_producto = producto.ID
                         WHERE carrito.ID_usuario = ?");
@@ -260,10 +263,10 @@ echo '</div>'; // Cierre del div del row del contenido principal
 echo '</div>'; // Cierre del div del contenedor del contenido principal
 echo '</section>'; // Cierre de la sección del contenido principal
 }
-$conn->close();
+$conexion->close();
 
 
-
+ob_end_flush();
 ?>
 
 

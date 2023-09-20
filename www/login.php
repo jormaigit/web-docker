@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Solo se inicia sessión si no hay otra sessión ya activa
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
@@ -44,6 +45,7 @@ if (isset($_POST["submit"])) {
 
         // BD
         $conexion = new mysqli("base_datos", "root", "test", "tienda");
+        $conexion->set_charset("utf8");
 
         if ($conexion->connect_error) {
             die("Error de conexión " . $conexion->connect_error);
@@ -85,6 +87,7 @@ if (isset($_POST["submit"])) {
 if (!isset($_POST["submit"]) || (isset($_POST["submit"]) && (empty($_POST["email"]) || empty($_POST["password"])))) {
     include('html/login.html');
 }
+ob_end_flush();
 ?>
 
 </body>
