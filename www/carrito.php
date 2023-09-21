@@ -17,7 +17,8 @@ $ID_usuario = $_SESSION['ID_usuario'];
 
 // Conexión a la BD
 $conexion = new mysqli("base_datos", "root", "test", "tienda");
-$conexion->set_charset("utf8");
+$conexion->set_charset("utf8mb4");
+
 ?>
 
 

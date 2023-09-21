@@ -1,7 +1,7 @@
-/* create database tienda;
-drop database tienda;
+create database tienda;
+/*drop database tienda;*/
 use tienda;
-SET SQL_SAFE_UPDATES = 0;
+/*SET SQL_SAFE_UPDATES = 0;
 
 -- -------------------------------------------
 -- --------------------------------------------

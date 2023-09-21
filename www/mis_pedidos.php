@@ -12,7 +12,8 @@ if (!isset($_SESSION["emailLogued"])) {
   }
 
   $conexion = new mysqli("base_datos", "root", "test", "tienda");
-  $conexion->set_charset("utf8");
+  $conexion->set_charset("utf8mb4");
+
 
 $ID_usuario = isset($_SESSION['ID_usuario']) ? intval($_SESSION['ID_usuario']) : 0;
 

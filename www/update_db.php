@@ -13,7 +13,8 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     $conexion = new mysqli("base_datos", "root", "test", "tienda");
-    $conexion->set_charset("utf8");
+    $conexion->set_charset("utf8mb4");
+
 
 $ID_usuario = $_SESSION['ID_usuario'];
 

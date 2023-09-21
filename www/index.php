@@ -234,7 +234,8 @@ function carrouselProductos($titulo, $nombredelproducto, $carrouselID, $conexion
 }
 
 $conexion = new mysqli("base_datos", "root", "test", "tienda");
-$conexion->set_charset("utf8");
+$conexion->set_charset("utf8mb4");
+
 
 // Arrays estáticos
 
