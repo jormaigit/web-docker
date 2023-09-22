@@ -1,5 +1,7 @@
-create database tienda;
-/*drop database tienda;*/
+/*create database tienda;
+drop database tienda;*/
+SET NAMES 'utf8mb4';
+SET CHARACTER SET utf8mb4;
 use tienda;
 /*SET SQL_SAFE_UPDATES = 0;
 
