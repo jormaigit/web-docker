@@ -6,7 +6,7 @@ Principales tecnologías y servicios empleadas:
 
 Entorno necesario para el despliegue:
 - Máquina virtual Ubuntu 20.04.6 LTS (6 GiB RAM y 2 núcleos de procesador).
-- Tener docker, docker compose y git instalados.
+- Tener docker, docker compose (version 2) y git instalados.
 - Tener los puertos 80, 8000 y 3006 libres.
 - Tener un usuario con permisos de sudo y que esté en el grupo docker.
 
