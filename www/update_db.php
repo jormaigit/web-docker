@@ -20,16 +20,16 @@ $ID_usuario = $_SESSION['ID_usuario'];
 
 // Inserta en la tabla pedidos los datos 
 $sql1 = "INSERT INTO pedidos (ID_usuario, fecha_compra, en_proceso) VALUES (?, NOW(), 1)";
-$stmt1 = $conn->prepare($sql1);
+$stmt1 = $conexion->prepare($sql1);
 $stmt1->bind_param("i", $ID_usuario);
 $stmt1->execute();
 
 // Obtiene el ID del pedido insertado
-$ID_pedido = $conn->insert_id;
+$ID_pedido = $conexion->insert_id;
 
 // Obtenemos el ID y las cantidades del carrito del usuario
 $sql3 = "SELECT ID_producto, cantidad FROM carrito WHERE ID_usuario = ?";
-$stmt3 = $conn->prepare($sql3);
+$stmt3 = $conexion->prepare($sql3);
 $stmt3->bind_param("i", $ID_usuario);
 $stmt3->execute();
 $result3 = $stmt3->get_result();
@@ -41,18 +41,18 @@ while ($row3 = $result3->fetch_assoc()) {
     // Insertamos los ID de producto, pedido y cantidad en la tabla producto_se_mueve_pedidos
     $sql2 = "INSERT INTO producto_se_mueve_pedidos (ID_producto, ID_pedido, cantidad) 
     VALUES (?, ?, ?)";
-    $stmt2 = $conn->prepare($sql2);
+    $stmt2 = $conexion->prepare($sql2);
     $stmt2->bind_param("iii", $ID_producto, $ID_pedido, $cantidad);
     $stmt2->execute();
 }
 
 // Limpia el carrito del usuario
 $sql4 = "DELETE FROM carrito WHERE ID_usuario = ?";
-$stmt4 = $conn->prepare($sql4);
+$stmt4 = $conexion->prepare($sql4);
 $stmt4->bind_param("i", $ID_usuario);
 $stmt4->execute();
 
-$conn->close();
+$conexion->close();
 
 ob_end_flush();
 ?>

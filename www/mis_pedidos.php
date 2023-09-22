@@ -18,7 +18,7 @@ if (!isset($_SESSION["emailLogued"])) {
 $ID_usuario = isset($_SESSION['ID_usuario']) ? intval($_SESSION['ID_usuario']) : 0;
 
 $sql1 = "SELECT * FROM pedidos WHERE ID_usuario = ?";
-$stmt1 = $conn->prepare($sql1);
+$stmt1 = $conexion->prepare($sql1);
 $stmt1->bind_param('i', $ID_usuario);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
@@ -52,7 +52,7 @@ if($result1->num_rows > 0) {
                 FROM producto_se_mueve_pedidos 
                 INNER JOIN producto ON producto_se_mueve_pedidos.ID_producto = producto.ID 
                 WHERE producto_se_mueve_pedidos.ID_pedido = ?";
-        $stmt2 = $conn->prepare($sql2);
+        $stmt2 = $conexion->prepare($sql2);
         $stmt2->bind_param('i', $ID_pedido);
         $stmt2->execute();
         $result2 = $stmt2->get_result();
@@ -92,7 +92,7 @@ if($result1->num_rows > 0) {
 } else {
     echo "<p>No hay pedidos realizados</p>";
 }
-    $conn->close();
+    $conexion->close();
 echo '</div>';
 
 ob_end_flush();
