@@ -34,7 +34,7 @@ PhpMyAdmin (Usuario / contraseña) --> root / test
 Guías de instalación:
 Docker ---> https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es
 
-Docker compose --> https://docs.docker.com/desktop/install/mac-install/
+Docker compose --> https://docs.docker.com/desktop/
 
 git --> https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-20-04-es
 
